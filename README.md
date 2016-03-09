@@ -16,6 +16,7 @@ var wechatShare = require('wechatshare');
 		img:'分享封面',
 		request_share_url:'签名接口地址', /*默认值是h5.yy.com*/
 		success_callback:function(){},	/*分享成功回调*/
-		cancel_callback:function(){}	/*分享失败回调*/
+		cancel_callback:function(){},	/*分享失败回调*/
+		debug:false	/*是否启用调试*/
     })
 ```
