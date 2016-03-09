@@ -1,9 +1,4 @@
-define(function (require, exports, module) {
-    "use strict";
-    var $ = window.jQuery;
-    /*
-     var wx = require('http://res.wx.qq.com/open/js/jweixin-1.1.0.js');
-     */
+!(function () {
     var wechatShare = function (opt) {
         if (!(this instanceof wechatShare)) {
             return new wechatShare(opt);
@@ -115,5 +110,17 @@ define(function (require, exports, module) {
             /*share end*/
         }
     }
-    module.exports = wechatShare;
-})
+    // RequireJS && SeaJS
+    if (typeof define === 'function') {
+        define(function () {
+            return wechatShare;
+        });
+
+// NodeJS
+    } else if (typeof exports !== 'undefined') {
+        module.exports = wechatShare;
+    } else {
+        this.wechatShare = wechatShare;
+    }
+
+})()
