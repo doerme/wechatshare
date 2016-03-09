@@ -1,12 +1,14 @@
 # wechatshare
 
+## 使用例子
 
-##页面先引入
+
+### seajs RequireJS 写法
+### 页面先引入
 ```script
 <script src="http://code.jquery.com/jquery-1.12.1.min.js"></script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 ```
-## 使用例子
 ```script
 var wechatShare = require('wechatshare');
     wechatShare({
@@ -18,5 +20,25 @@ var wechatShare = require('wechatshare');
 		success_callback:function(){},	/*分享成功回调*/
 		cancel_callback:function(){},	/*分享失败回调*/
 		debug:false	/*是否启用调试*/
+    })
+```
+### 普通引入写法
+### 页面先引入
+```script
+<script src="http://code.jquery.com/jquery-1.12.1.min.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="wechatshare.js"></script>
+```
+```script
+wechatShare({
+        title: '标题',
+        desc: '描述',
+        success_callback: function () {
+            alert('success');
+        },
+        cancel_callback: function () {
+            alert('cancel');
+        },
+        debug: true
     })
 ```
