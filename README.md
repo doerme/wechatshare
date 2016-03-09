@@ -1,6 +1,10 @@
 # wechatshare
 ## 使用例子
 
+##页面先引入
+###<script src="http://code.jquery.com/jquery-1.12.1.min.js"></script>
+###<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
 ```script
 var wechatShare = require('wechatshare');
     wechatShare({
