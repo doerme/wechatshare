@@ -19,7 +19,8 @@ define(function (require, exports, module) {
             },
             cancel_callback: function () {
 
-            }
+            },
+            debug: false
         }
         this.defaults = $.extend(config, opt, true);
         this.init();
@@ -42,7 +43,7 @@ define(function (require, exports, module) {
                 console.log('defaluts', self.defaults);
                 var msg = jdata.wxapi;
                 wx.config({
-                    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                    debug: self.defaults.debug, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
                     appId: msg.appId, // 必填，公众号的唯一标识
                     timestamp: msg.timestamp, // 必填，生成签名的时间戳
                     nonceStr: msg.nonceStr, // 必填，生成签名的随机串
@@ -60,10 +61,10 @@ define(function (require, exports, module) {
                         link: share_link, // 分享链接
                         imgUrl: share_img, // 分享图标
                         success: function () {
-                            self.defaults.success_callback;
+                            self.defaults.success_callback();
                         },
                         cancel: function () {
-                            self.defaults.cancel_callback;
+                            self.defaults.cancel_callback();
                         }
                     });
                     //分享给朋友
@@ -75,10 +76,10 @@ define(function (require, exports, module) {
                         type: '', // 分享类型,music、video或link，不填默认为link
                         dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
                         success: function () {
-                            self.defaults.success_callback;
+                            self.defaults.success_callback();
                         },
                         cancel: function () {
-                            self.defaults.cancel_callback;
+                            self.defaults.cancel_callback();
                         }
                     });
 
@@ -89,10 +90,10 @@ define(function (require, exports, module) {
                         link: share_link, // 分享链接
                         imgUrl: share_img, // 分享图标
                         success: function () {
-                            self.defaults.success_callback;
+                            self.defaults.success_callback();
                         },
                         cancel: function () {
-                            self.defaults.cancel_callback;
+                            self.defaults.cancel_callback();
                         }
                     });
 
@@ -103,10 +104,10 @@ define(function (require, exports, module) {
                         link: share_link, // 分享链接
                         imgUrl: share_img, // 分享图标
                         success: function () {
-                            self.defaults.success_callback;
+                            self.defaults.success_callback();
                         },
                         cancel: function () {
-                            self.defaults.cancel_callback;
+                            self.defaults.cancel_callback();
                         }
                     })
                 });
