@@ -13,7 +13,13 @@ define(function (require, exports, module) {
             desc: '微信分享内容',
             link: window.location.href,
             img: 'http://makefriends.bs2dl.yy.com/48980134342886519512.png',
-            request_share_url: 'http://h5.yy.com/wap/getsharecf?url=' + encodeURIComponent(window.location.href.split('#')[0])
+            request_share_url: 'http://h5.yy.com/wap/getsharecf?url=' + encodeURIComponent(window.location.href.split('#')[0]),
+            success_callback: function () {
+
+            },
+            cancel_callback: function () {
+
+            }
         }
         this.defaults = $.extend(config, opt, true);
         this.init();
@@ -54,10 +60,10 @@ define(function (require, exports, module) {
                         link: share_link, // 分享链接
                         imgUrl: share_img, // 分享图标
                         success: function () {
-
+                            self.defaults.success_callback;
                         },
                         cancel: function () {
-
+                            self.defaults.cancel_callback;
                         }
                     });
                     //分享给朋友
@@ -69,10 +75,10 @@ define(function (require, exports, module) {
                         type: '', // 分享类型,music、video或link，不填默认为link
                         dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
                         success: function () {
-
+                            self.defaults.success_callback;
                         },
                         cancel: function () {
-
+                            self.defaults.cancel_callback;
                         }
                     });
 
@@ -83,10 +89,10 @@ define(function (require, exports, module) {
                         link: share_link, // 分享链接
                         imgUrl: share_img, // 分享图标
                         success: function () {
-
+                            self.defaults.success_callback;
                         },
                         cancel: function () {
-
+                            self.defaults.cancel_callback;
                         }
                     });
 
@@ -97,10 +103,10 @@ define(function (require, exports, module) {
                         link: share_link, // 分享链接
                         imgUrl: share_img, // 分享图标
                         success: function () {
-
+                            self.defaults.success_callback;
                         },
                         cancel: function () {
-
+                            self.defaults.cancel_callback;
                         }
                     })
                 });
