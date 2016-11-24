@@ -1,4 +1,37 @@
 !(function () {
+	var jsonpData = function(url, callback) {
+        let callbackName = 'jsonp_callback_' + Math.round(100000 * Math.random());
+        window[callbackName] = function(data) {
+            delete window[callbackName];
+            document.body.removeChild(script);
+            callback(data);
+        };
+        let script = document.createElement('script');
+        script.src = url + (url.indexOf('?') >= 0 ? '&' : '?') + 'callback=' + callbackName;
+        document.body.appendChild(script);
+    }
+	
+	var cloneObj = function(oldObj) { //复制对象方法
+		if (typeof(oldObj) != 'object') return oldObj;
+		if (oldObj == null) return oldObj;
+		var newObj = new Object();
+		for (var i in oldObj)
+		newObj[i] = cloneObj(oldObj[i]);
+		return newObj;
+	}
+	
+	var extendObj = function() { //扩展对象
+		var args = arguments;
+		if (args.length < 2) return;
+		var temp = cloneObj(args[0]); //调用复制对象方法
+		for (var n = 1; n < args.length; n++) {
+			for (var i in args[n]) {
+				temp[i] = args[n][i];
+			}
+		}
+		return temp;
+	}
+	
     var wechatShare = function (opt) {
         if (!(this instanceof wechatShare)) {
             return new wechatShare(opt);
@@ -17,59 +50,10 @@
             },
             debug: false
         }
-        this.defaults = $.extend(config, opt, true);
+        this.defaults = extendObj(config, opt);
         this.init();
     }
 	
-	var Ajax = function(type, url, data, success, failed){
-		// 创建ajax对象
-		var xhr = null;
-		if(window.XMLHttpRequest){
-			xhr = new XMLHttpRequest();
-		} else {
-			xhr = new ActiveXObject('Microsoft.XMLHTTP')
-		}
-	 
-		var type = type.toUpperCase();
-		// 用于清除缓存
-		var random = Math.random();
-	 
-		if(typeof data == 'object'){
-			var str = '';
-			for(var key in data){
-				str += key+'='+data[key]+'&';
-			}
-			data = str.replace(/&$/, '');
-		}
-	 
-		if(type == 'GET'){
-			if(data){
-				xhr.open('GET', url + '?' + data, true);
-			} else {
-				xhr.open('GET', url + '?t=' + random, true);
-			}
-			xhr.send();
-	 
-		} else if(type == 'POST'){
-			xhr.open('POST', url, true);
-			// 如果需要像 html 表单那样 POST 数据，请使用 setRequestHeader() 来添加 http 头。
-			xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			xhr.send(data);
-		}
-	 
-		// 处理返回数据
-		xhr.onreadystatechange = function(){
-			if(xhr.readyState == 4){
-				if(xhr.status == 200){
-					success(xhr.responseText);
-				} else {
-					if(failed){
-						failed(xhr.status);
-					}
-				}
-			}
-		}
-	}
 
     wechatShare.prototype = {
         init: function () {
@@ -80,7 +64,7 @@
             var self = this;
             /*share*/
             var request_share_url = self.defaults.request_share_url;
-            Ajax('get', request_share_url, {}, function(jdata){
+            jsonpData(request_share_url, function(jdata){
 				console.log('doconfig', jdata);
                 console.log('defaluts', self.defaults);
                 var msg = jdata.wxapi;
