@@ -6,11 +6,10 @@
 ### seajs RequireJS 写法
 ### 页面先引入
 ```script
-<script src="http://code.jquery.com/jquery-1.12.1.min.js"></script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 ```
 ```script
-var wechatShare = require('wechatshare');
+var wechatShare = require('wechatshare.pure');
     wechatShare({
 		title: '标题',
 		desc: '描述',
@@ -25,9 +24,8 @@ var wechatShare = require('wechatshare');
 ### 普通引入写法
 ### 页面先引入
 ```script
-<script src="http://code.jquery.com/jquery-1.12.1.min.js"></script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-<script src="wechatshare.js"></script>
+<script src="wechatshare.pure.js"></script>
 ```
 ```script
 wechatShare({
